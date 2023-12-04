@@ -55,7 +55,7 @@ def item():
         else:
             ex=open("Diff.txt","a")
             l = sheet_ranges_1[f"A{i}"].value
-            ex.write(f"{l}\n\n)
+            ex.write(f"{l}\n\n")
     ex.close
     pass    
 # đọc dữ liệu Stock 23/11/2023
