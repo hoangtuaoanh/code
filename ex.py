@@ -40,43 +40,34 @@ def item():
     wi = load_workbook(filename= 'Route Master.xlsx')
     sheet_ranges = wi['route']
     maxi = sheet_ranges.max_row
-    f = open("router.txt","a")
-    list = []
+    listM = []
     for i in range(3 , maxi+1):
-        list.append(sheet_ranges[f"C{i}"].value)
-    f.write(format(list))
-    f.close()
-item()
-# đọc dữ liệu master 23/11/2023
-def f_po():
-    from openpyxl import load_workbook
+        listM.append(sheet_ranges[f"C{i}"].value)
+    pass
+
+# đọc dữ liệu PO 23/11/2023
     wp = load_workbook(filename= 'PO.xlsx')
-    sheet_ranges = wp['CUS030']
-    f = open("router.txt","r")
-    list = f.read()
-    masp = sheet_ranges.max_row
+    sheet_ranges_1 = wp['CUS030']
+    masp = sheet_ranges_1.max_row
     for i in range( 5, masp-4):
-        if sheet_ranges[f"A{i}"].value in list:
+        if sheet_ranges_1[f"A{i}"].value in listM:
             continue
         else:
             ex=open("Diff.txt","a")
-            ex.write(sheet_ranges[f"A{i}"].value)
-        
-    pass    
-def f_stock():
-    from openpyxl import load_workbook
-    we = load_workbook(filename= 'Stock.xlsx')
-    sheet_ranges = we['Sheet1']
-    f = open("router.txt","r")
-    list = f.read()
-    masx = sheet_ranges.max_row
-    for i in range( 7, masx+1):
-        if sheet_ranges[f"A{i}"].value in list:
-            continue
-        else:
-            ex=open("Diff.txt","a")
-            t=sheet_ranges[f"A{i}"].value
-            ex.write(f"{t}\n")
+            l = sheet_ranges_1[f"A{i}"].value
+            ex.write(f"{l}\n\n)
     ex.close
-f_stock()
-f_po()
+    pass    
+# đọc dữ liệu Stock 23/11/2023
+    we = load_workbook(filename= 'Stock.xlsx')
+    sheet_ranges_2 = we['Sheet1']
+    masx = sheet_ranges_2.max_row
+    for i in range( 7, masx+1):
+        if sheet_ranges_2[f"A{i}"].value in listM:
+            continue
+        else:
+            ex=open("Diff.txt","a")
+            t=sheet_ranges_2[f"A{i}"].value
+            ex.write(f"{t}\n\n")
+    ex.close
+item()
