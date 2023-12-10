@@ -1,0 +1,18 @@
+import pyodbc
+
+server = 'tcp:SQLSERVER' 
+database = 'DB' 
+username = 'UID' 
+password = 'PWD' 
+conn = pyodbc.connect('DRIVER={SQL Server Native Client 11.0};SERVER='+server+';DATABASE='+database+';UID='+username+';PWD='+ password)
+
+cursor = conn.cursor()
+
+# Prepare the stored procedure execution script and parameter values
+storedProc = "exec USR_SP @MeetingCode = ?, @vendor = ?, @AttendeeId = ?, @ExternalId = ?"
+params = ('101','CC', ref, oid)
+
+# Execute Stored Procedure With Parameters
+cursor.execute(storedProc, params)
+# Call commit() method to save changes to the database
+conn.commit()  	
